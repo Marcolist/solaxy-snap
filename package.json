@@ -1,0 +1,34 @@
+{
+  "name": "@marcolist/solaxy-snap",
+  "version": "1.0.0",
+  "description": "Manage Solaxy-based tokens and NFTs, swap, stake, bridge from EVM,Sol to SOLAXY, and connect to Solaxy apps with MetaMask.",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "mm-snap build && mm-snap serve",
+    "build": "mm-snap build",
+    "deploy": "npm run build && npm publish"
+  },
+  "homepage": "https://github.com/Marcolist/solaxy-snap",
+  "author": "Marco List <listmarco@gmail.com>",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Marcolist/solaxy-snap.git"
+  },
+  "bugs": "https://github.com/Marcolist/solaxy-snap/issues",
+  "files": [
+    "dist/",
+    "logo.svg",
+    "snap.manifest.json"
+  ],
+  "dependencies": {
+    "@babel/runtime": "^7.21.5",
+    "@metamask/key-tree": "^7.0.0",
+    "@metamask/snaps-ui": "^0.32.2",
+    "bs58": "^5.0.0",
+    "tweetnacl": "^1.0.3"
+  },
+  "devDependencies": {
+    "@metamask/snaps-cli": "^8.3.0"
+  }
+}
