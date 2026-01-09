@@ -27,5 +27,3 @@ npm start
 The production snap is available as Snap ID `npm:@marcolist/solaxy-snap`.
 
 The locally started snap is available as Snap ID `local:http://localhost:8081`.
-
-See the [RPC API](./RPC.md) for more information on how to interact with the snap.
