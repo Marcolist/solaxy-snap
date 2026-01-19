@@ -26,10 +26,10 @@ The Solaxy Wallet Snap is a MetaMask Snap that provides Solana-compatible wallet
 **Threat**: A malicious dApp attempts to extract private keys or trick users into signing unauthorized transactions.
 
 **Mitigations**:
-- ✅ **Three-Tier Access Control**:
-  - **Tier 1**: `localhost` (development only, HTTP allowed)
-  - **Tier 2**: `solaxy.io` domains (hardcoded whitelist, audit-covered)
-  - **Tier 3**: User-approved domains (explicit user approval required)
+- ✅ **Two-Tier Access Control**:
+  - **Tier 1**: `solaxy.io` domains (hardcoded whitelist, audit-covered)
+  - **Tier 2**: User-approved domains (explicit user approval required)
+
 - ✅ **Domain Approval Dialog**: Unknown domains must be explicitly approved by user
 - ✅ **User Confirmation**: All signing operations require explicit user approval via MetaMask dialog
 - ✅ **Transaction Display**: Transaction data is shown to users before signing
@@ -84,20 +84,20 @@ The Solaxy Wallet Snap is a MetaMask Snap that provides Solana-compatible wallet
 
 ## Domain Access Control
 
-### Three-Tier Architecture
+### Two-Tier Architecture
 
-#### Tier 1: Development (localhost)
-- **Allowed Protocol**: HTTP
-- **Purpose**: Local development and testing
-- **Security**: Only accessible from local machine
+#### Tier 1: Hardcoded Whitelist (solaxy.io)
 
-#### Tier 2: Hardcoded Whitelist (solaxy.io)
+
+
+
+
 - **Domains**: `solaxy.io` and all subdomains (`*.solaxy.io`)
 - **Status**: Audit-covered, hardcoded in source
 - **Trust Level**: Fully trusted (official project domains)
 - **Changes**: Require code update and new audit
 
-#### Tier 3: User-Approved Domains
+#### Tier 2: User-Approved Domains
 - **Mechanism**: Dynamic approval via confirmation dialog
 - **Storage**: Encrypted snap state (MetaMask-managed)
 - **Trust Level**: User-defined trust
@@ -129,7 +129,7 @@ Users can manage approved domains via RPC methods:
 ### Security Properties
 
 1. **Explicit Approval**: Each new domain requires user confirmation
-2. **HTTPS Enforced**: Only HTTPS domains can be approved (except localhost)
+2. **HTTPS Enforced**: Only HTTPS domains can be approved
 3. **Full Disclosure**: Approval dialog explains permissions being granted
 4. **Revocable**: Users can revoke access at any time
 5. **Phishing Protection**: Domain name prominently displayed in all dialogs
@@ -190,3 +190,4 @@ If you discover a security vulnerability, please report it to:
 This security documentation applies to version 1.0.0 of the Solaxy Wallet Snap.
 
 Last Updated: 2026-01-18
+
