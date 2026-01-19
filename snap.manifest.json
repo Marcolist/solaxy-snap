@@ -1,0 +1,37 @@
+{
+  "version": "1.0.0",
+  "description": "Manage Solaxy-based tokens and NFTs, swap, stake, bridge from EVM,SOL to SOLAXY, and connect to Solaxy apps with MetaMask.",
+  "proposedName": "Solaxy Wallet",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Marcolist/solaxy-snap.git"
+  },
+  "source": {
+    "shasum": "HOVu5it2q4Ur2XSUfhxO5d4YvS2cWDBrVcWacekRVVc=",
+    "location": {
+      "npm": {
+        "filePath": "dist/bundle.js",
+        "iconPath": "logo.svg",
+        "packageName": "@marcolist/solaxy-snap",
+        "registry": "https://registry.npmjs.org"
+      }
+    }
+  },
+  "initialPermissions": {
+    "endowment:rpc": {
+      "dapps": true,
+      "snaps": false
+    },
+    "endowment:network-access": {},
+    "snap_dialog": {},
+    "snap_manageState": {},
+    "snap_getBip32Entropy": [
+      {
+        "path": ["m", "44'", "501'"],
+        "curve": "ed25519"
+      }
+    ]
+  },
+  "platformVersion": "10.3.0",
+  "manifestVersion": "0.1"
+}

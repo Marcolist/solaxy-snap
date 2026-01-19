@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Solaxy Snap Demo</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    button { padding: 10px 20px; margin: 5px; font-size: 16px; cursor: pointer; }
+    button:disabled { opacity: 0.5; cursor: not-allowed; }
+    #result { margin-top: 20px; padding: 10px; background: #f0f0f0; min-height: 50px; }
+    .error { color: red; }
+    .success { color: green; }
+  </style>
+</head>
+<body>
+  <h1>Solaxy Wallet Snap</h1>
+  <div id="status">Checking MetaMask...</div>
+  <button id="connect" disabled>Connect to Solaxy</button>
+  <button id="getPublicKey" disabled>Get Public Key</button>
+  <div id="result"></div>
+  
+  <script>
+    const snapId = 'local:http://localhost:8081';
+    const SOLAXY_RPC = 'https://mainnet.rpc.solaxy.io';
+    
+    function log(message, isError = false) {
+      const result = document.getElementById('result');
+      result.innerHTML = `<div class="${isError ? 'error' : 'success'}">${message}</div>`;
+      console.log(message);
+    }
+    
+    // Check if MetaMask is installed
+    window.addEventListener('load', async () => {
+      if (typeof window.ethereum !== 'undefined') {
+        document.getElementById('status').innerHTML = '<span class="success">✓ MetaMask detected</span>';
+        document.getElementById('connect').disabled = false;
+        document.getElementById('getPublicKey').disabled = false;
+      } else {
+        document.getElementById('status').innerHTML = '<span class="error">✗ MetaMask not found. Install MetaMask Flask!</span>';
+        log('Please install MetaMask Flask from https://metamask.io/flask/', true);
+      }
+    });
+    
+    document.getElementById('connect').addEventListener('click', async () => {
+      try {
+        log('Connecting to Snap...');
+        const result = await ethereum.request({
+          method: 'wallet_requestSnaps',
+          params: {
+            [snapId]: {}
+          }
+        });
+        log('✓ Snap connected successfully! ' + JSON.stringify(result));
+      } catch (error) {
+        log('✗ Error connecting: ' + error.message, true);
+        console.error(error);
+      }
+    });
+    
+    document.getElementById('getPublicKey').addEventListener('click', async () => {
+      try {
+        log('Getting public key...');
+        const result = await ethereum.request({
+          method: 'wallet_invokeSnap',
+          params: {
+            snapId,
+            request: {
+              method: 'getPublicKey',
+              params: {
+                rpcUrl: SOLAXY_RPC,
+                confirm: true
+              }
+            }
+          }
+        });
+        log('✓ Public Key: ' + result);
+      } catch (error) {
+        log('✗ Error getting public key: ' + error.message, true);
+        console.error(error);
+      }
+    });
+  </script>
+</body>
+</html>
