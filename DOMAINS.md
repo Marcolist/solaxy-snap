@@ -2,20 +2,11 @@
 
 ## Overview
 
-The Solaxy Wallet Snap uses a **three-tier access control system** that balances security with ecosystem flexibility. This allows official Solaxy apps to have seamless access, while enabling partner integrations without requiring snap updates or new security audits.
+The Solaxy Wallet Snap uses a **two-tier access control system** that balances security with ecosystem flexibility. This allows official Solaxy apps to have seamless access, while enabling partner integrations without requiring snap updates or new security audits.
 
-## Three-Tier Architecture
+## Two-Tier Architecture
 
-### Tier 1: Development (localhost)
-
-**Access Level**: Automatic (for local development)
-
-- **Pattern**: `http://localhost` (any port)
-- **Purpose**: Local snap development and integration testing
-- **Protocol**: HTTP allowed (localhost only)
-- **Security**: Only accessible from developer's local machine
-
-### Tier 2: Hardcoded Whitelist (solaxy.io)
+### Tier 1: Hardcoded Whitelist (solaxy.io)
 
 **Access Level**: Pre-approved (audit-covered)
 
@@ -41,11 +32,11 @@ The Solaxy Wallet Snap uses a **three-tier access control system** that balances
 - All subdomains can be quickly provisioned without snap updates
 - Keeps audit scope focused on official infrastructure
 
-### Tier 3: User-Approved Domains
+### Tier 2: User-Approved Domains
 
 **Access Level**: User-granted (dynamic approval)
 
-- **Any HTTPS domain** not in Tier 1 or 2
+- **Any HTTPS domain** not in Tier 1
 - **Examples**:
   - Partner dApps: `https://partner-dex.com`
   - Ecosystem apps: `https://nft-marketplace.xyz`
@@ -214,7 +205,7 @@ const result = await ethereum.request({
 - Users must explicitly click "Approve"
 
 **Technical Protection**:
-- HTTPS enforced (no HTTP except localhost)
+- HTTPS enforced (no HTTP allowed)
 - Domain stored as exact match (no wildcards for user-approved)
 - MetaMask's anti-phishing measures apply
 
@@ -274,7 +265,7 @@ const result = await ethereum.request({
 
 ## Version History
 
-- **v1.0.0** (2026-01-18): Hybrid three-tier access control
+- **v1.0.0** (2026-01-18): Hybrid two-tier access control
   - Hardcoded: solaxy.io and subdomains
   - Dynamic: User-approved domains
   - Management: list/revoke RPC methods
@@ -286,3 +277,4 @@ For questions about domain access control:
 - **GitHub**: https://github.com/Marcolist/solaxy-snap/issues
 
 Last Updated: 2026-01-18
+
